@@ -25,8 +25,8 @@ class LinearRegressionGD:
     
     def r2_score(self, y_test, y_pred):
         ssr = np.sum((y_test - y_pred) ** 2)
-        sst = np.sum((y_test - np.mean(y_test)) ** 2)
-        return 1 - (ssr / sst)
+        ssm = np.sum((y_test - np.mean(y_test)) ** 2)
+        return 1 - (ssr / ssm)
 
 # Example usage
 slr = LinearRegressionGD()
