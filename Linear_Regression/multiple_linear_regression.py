@@ -7,9 +7,9 @@ class multiple_linear_regression:
   def fit(self,X_train,y_train):
     X_train=np.insert(X_train,0,1,axis=1)
     # clac all coeffs
-    beta=np.linalg.inv(np.dot(X_train.T,X_train)).dot(X_train.T).dot(y_train)
-    self.intercept=beta[0]
-    self.coef=beta[1:]
+    betas=np.linalg.inv(np.dot(X_train.T,X_train)).dot(X_train.T).dot(y_train)
+    self.intercept=betas[0]
+    self.coef=betas[1:]
   def predict(self,X_test):
     y_pred= np.dot(X_test,self.coef) + self.intercept
     return y_pred
