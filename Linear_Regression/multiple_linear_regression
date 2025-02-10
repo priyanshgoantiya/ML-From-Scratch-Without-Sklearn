@@ -1,4 +1,5 @@
 ## multiple_linear_regression
+import numpy 
 class multiple_linear_regression:
   def __init__(self):
     self.coef=None
