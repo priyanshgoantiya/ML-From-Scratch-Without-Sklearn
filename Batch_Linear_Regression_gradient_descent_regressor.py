@@ -1,6 +1,6 @@
-## multiple_gradient_descent_regressor
+## Batch_gradient_descent_regressor
 import numpy 
-class multiple_gradient_descent_regressor:
+class Batch_gradient_descent_regressor:
   def __init__(self,learning_rate=0.01,epochs=100):
     self.coef_ = None
     self.intercept_ = None
