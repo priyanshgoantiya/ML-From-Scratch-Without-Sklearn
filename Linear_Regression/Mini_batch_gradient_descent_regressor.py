@@ -19,7 +19,7 @@ class stochastic_gradient_descent_regressor:
         y_batch=y_train[indices]
         # update all coef and the intercept
         y_hat=np.dot(X_batch,self.coef_) + self.intercept_
-        slope_intercept=(-2/self.batch_size) * np.sum(y_batch-y_hat)
+        slope_intercept=(-2) * np.mean(y_batch-y_hat)
         self.intercept_=self.intercept_ - (self.lr * slope_intercept)
         slope_coef=(-2/self.batch_size) * np.dot((y_batch-y_hat),X_batch)
         self.coef_=self.coef_ - (self.lr * slope_coef)
