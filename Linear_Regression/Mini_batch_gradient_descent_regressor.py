@@ -1,7 +1,7 @@
 # Mini_batch_gradient_descent_regressor
 import numpy 
-class Mini_batch_gradient_descent_regressor:
-  def __init__(self,learning_rate=0.01,epochs=100,batch_size=10):
+class stochastic_gradient_descent_regressor:
+  def __init__(self,batch_size,learning_rate=0.01,epochs=100):
     self.coef_ = None
     self.intercept_ = None
     self.lr=learning_rate
@@ -14,12 +14,14 @@ class Mini_batch_gradient_descent_regressor:
     n_batches=max(n_samples//self.batch_size,1)
     for i in range(self.iteration):
       for j in range(n_batches):
-        index=np.random.randint(n_samples)
+        indices=np.random.choice(n_samples,self.batch_size,replace=True)
+        X_batch=X_train[indices]
+        y_batch=y_train[indices]
         # update all coef and the intercept
-        y_hat=np.dot(X_train[index],self.coef_) + self.intercept_
-        slope_intercept=(-2) * (y_train[index]-y_hat)
+        y_hat=np.dot(X_batch,self.coef_) + self.intercept_
+        slope_intercept=(-2/self.batch_size) * np.sum(y_batch-y_hat)
         self.intercept_=self.intercept_ - (self.lr * slope_intercept)
-        slope_coef=(-2) * np.dot((y_train[index]-y_hat),X_train[index])
+        slope_coef=(-2/self.batch_size) * np.dot((y_batch-y_hat),X_batch)
         self.coef_=self.coef_ - (self.lr * slope_coef)
   def predict(self,X_test):
     y_pred=np.dot(X_test,self.coef_) + self.intercept_
