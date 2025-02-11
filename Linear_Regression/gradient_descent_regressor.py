@@ -2,8 +2,8 @@
 import numpy 
 class gradient_descent_regressor:
   def __init__(self,learning_rate,epochs):
-    self.m=100
-    self.b=-120
+    self.m = np.random.randn()  # Random initialization
+    self.b = np.random.randn()  # Random initialization
     self.lr=learning_rate
     self.iteration=epochs
   def fit(self,X,y):
