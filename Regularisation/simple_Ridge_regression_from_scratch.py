@@ -15,3 +15,7 @@ class Ridge_regression_from_scratch:
     self.b=np.mean(y_train)-[(self.m)*np.mean(X_train)]
   def predict(self,X_test):
     return np.array([self.m*x + self.b for x in X_test])
+  def r2_score(self, y_test, y_pred):
+    ssr = np.sum((y_test - y_pred) ** 2)
+    ssm = np.sum((y_test - np.mean(y_test)) ** 2)
+    return 1 - (ssr / ssm)
