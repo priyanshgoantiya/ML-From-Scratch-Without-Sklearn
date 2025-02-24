@@ -13,7 +13,9 @@ class Ridge_regression_for_ndim_from_scratch_with_gradient_descent:
     parameter=np.insert(self.coef_,0,self.intercept_)
     X_train=np.insert(X_train,0,1,axis=1)
     for i in range(self.epochs):
-      parameter_derivative=(1/n_samples) * (np.dot(X_train.T,X_train).dot(parameter)- np.dot(X_train.T,y_train) + self.alpha*parameter)
+      y_pred=np.dot(X_train,parameter)
+      error=y_pred-y_train
+      parameter_derivative=(1/n_samples) * (np.dot(X_train.T,error) + self.alpha*parameter)
       parameter=parameter -(self.learning_rate * parameter_derivative)
     self.coef_=parameter[1:]
     self.intercept_=parameter[0]
