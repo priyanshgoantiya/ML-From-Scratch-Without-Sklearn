@@ -1,5 +1,5 @@
 ##ball_tree_from_scratch
-from scipy.spatial import cKDTree
+from scipy.spatial import KDTree
 import numpy 
 class ball_tree_from_scratch:
   def __init__(self,K):
@@ -10,7 +10,7 @@ class ball_tree_from_scratch:
   def fit(self,X_train,y_train):
     self.X_train=np.array(X_train)
     self.y_train=np.array(y_train)
-    self.tree=cKDTree(X_train)
+    self.tree=KDTree(X_train)
   def predict(self,X_test):
     prediction=[]
     X_test = np.array(X_test)
