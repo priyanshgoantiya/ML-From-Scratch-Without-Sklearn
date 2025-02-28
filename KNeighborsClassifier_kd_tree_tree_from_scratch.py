@@ -1,7 +1,7 @@
 ##ball_tree_from_scratch
 from scipy.spatial import KDTree
 import numpy 
-class ball_tree_from_scratch:
+class kd_tree_from_scratch:
   def __init__(self,K):
     self.neighbors=K
     self.X_train=None
