@@ -29,9 +29,7 @@ class ovr_logistic_regression:
       y_binary=np.where(y_train==clas,1,0)
       self.weights[clas],self.bias[clas]=self.train_binary(X_train,y_binary)
   def predict_prob(self,X_test):
-    probs={}
-    for clas in self.classes:
-      probs=np.array([self.sigmoid((np.dot(X_test,self.weights[clas]))+ self.bias[clas]) for clas in self.classes])
+    probs=np.array([self.sigmoid((np.dot(X_test,self.weights[clas]))+ self.bias[clas]) for clas in self.classes])
     return probs.T
   def predict(self,X_test):
     probs=self.predict_prob(X_test)
