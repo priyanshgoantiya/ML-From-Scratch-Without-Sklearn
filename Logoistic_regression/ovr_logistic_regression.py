@@ -1,17 +1,18 @@
-# ovr_logistic_regression_for_multiclass_classification
+# ovr_logistic_regression_for_multiclass_classification_with_batch_gd
 import numpy as np 
 class ovr_logistic_regression:
-  def __init__(self,learning_rate=0.01,epochs=1000):
+  def __init__(self,learning_rate=0.01,epochs=100):
     self.lr=learning_rate
     self.iteration=epochs
-    self.weights={}
-    self.bias={}
+    self.weights=None
+    self.bias=None
+    self.classes=None
   def sigmoid(self,z):
-    z = np.clip(z, -500, 500)
+    z = np.clip(z, -100, 100)
     return (1/(1+np.exp(-z)))
   def train_binary(self,X_train,y_train):
     n_samples,n_features=X_train.shape
-    weights=np.ones(n_features)
+    weights=np.zeros(n_features)
     bias=0
     for _ in range(self.iteration):
       y_hat=self.sigmoid(np.dot(X_train,weights)+bias)
@@ -21,6 +22,8 @@ class ovr_logistic_regression:
       bias=bias - (self.lr*derivative_bias)
     return weights,bias
   def fit(self,X_train,y_train):
+    self.weights={}
+    self.bias={}
     self.classes=np.unique(y_train)
     for clas in self.classes:
       y_binary=np.where(y_train==clas,1,0)
@@ -28,8 +31,8 @@ class ovr_logistic_regression:
   def predict_prob(self,X_test):
     probs={}
     for clas in self.classes:
-      probs[clas]=self.sigmoid((np.dot(X_test,self.weights[clas]))+ self.bias[clas])
-    return probs
+      probs=np.array([self.sigmoid((np.dot(X_test,self.weights[clas]))+ self.bias[clas]) for clas in self.classes])
+    return probs.T
   def predict(self,X_test):
     probs=self.predict_prob(X_test)
-    return np.array([max(probs ,key=lambda clas: probs[clas][i]) for i in range(X_test.shape[0])])
+    return self.classes[np.argmax(probs,axis=1)]
