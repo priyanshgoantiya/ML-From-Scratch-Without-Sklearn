@@ -1,2 +1,7 @@
 # dependency
 numpy ==1.26.4
+matplotlib
+streamlit
+numpy
+scikit-learn
+
