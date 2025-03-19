@@ -1,6 +1,6 @@
 # dependency
-numpy ==1.26.4
-matplotlib
+numpy
+seaborn
 streamlit
 numpy
 scikit-learn
